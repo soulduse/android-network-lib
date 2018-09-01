@@ -15,14 +15,13 @@ object ApiProvider {
         okHttpClient = provideOkHttpClient(httpLogging)
     }
 
-    fun <T : Any> provideApi(apiInterface: T,
-                             baseUrl: String,
-                             isDebug: Boolean = true): T {
-
+    fun <T> provideApi(service: Class<T>,
+                   baseUrl: String,
+                   isDebug: Boolean = true): T {
         httpLogging.level = if (isDebug)
-                HttpLoggingInterceptor.Level.BODY
-            else
-                HttpLoggingInterceptor.Level.NONE
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
 
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -30,9 +29,8 @@ object ApiProvider {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
-                .create(apiInterface::class.java)
+                .create(service)
     }
-
 
     private fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient =
             OkHttpClient().newBuilder()
