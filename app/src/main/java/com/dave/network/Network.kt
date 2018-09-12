@@ -7,21 +7,29 @@ import kotlinx.coroutines.experimental.launch
 /**
  * Usage
  * Network.request(
+ *          doOnSubscribe = { loading },
+ *          doOnTerminate = { init },
  *          call = call,
  *          success = { },
- *          fail = { })
+ *          fail = { }
+ * )
  */
 
 object Network {
     fun <T> request(
             call: Deferred<T>,
             success: ((response: T)-> Unit)?,
-            fail: ((throwable: Throwable)-> Unit)?= null) {
+            error: ((throwable: Throwable)-> Unit)?= null,
+            doOnSubscribe: (()-> Unit)?= null,
+            doOnTerminate: (()-> Unit)?= null) {
         launch(UI) {
+            doOnSubscribe?.invoke()
             try {
                 success?.invoke(call.await())
             } catch (t: Throwable) {
-                fail?.invoke(t)
+                error?.invoke(t)
+            } finally {
+                doOnTerminate?.invoke()
             }
         }
     }
