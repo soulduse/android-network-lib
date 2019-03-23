@@ -10,7 +10,7 @@ publish {
     userOrg = 'developerkhw'
     groupId = 'com.dave.network'
     artifactId = 'network-release'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.3'
     desc = 'Easy to use retrofit'
     website = 'https://github.com/soulduse'
 }
