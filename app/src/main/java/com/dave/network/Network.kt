@@ -1,8 +1,9 @@
 package com.dave.network
 
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * Usage
@@ -22,7 +23,7 @@ object Network {
             error: ((throwable: Throwable)-> Unit)?= null,
             doOnSubscribe: (()-> Unit)?= null,
             doOnTerminate: (()-> Unit)?= null) {
-        launch(UI) {
+        GlobalScope.launch(Dispatchers.Main) {
             doOnSubscribe?.invoke()
             try {
                 success?.invoke(call.await())
