@@ -10,7 +10,7 @@ publish {
     userOrg = 'developerkhw'
     groupId = 'com.dave.network'
     artifactId = 'network-release'
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
     desc = 'Easy to use retrofit'
     website = 'https://github.com/soulduse'
 }
@@ -20,8 +20,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -40,7 +40,7 @@ dependencies {
     // Retrofit Lib
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$retrofitConverterVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofitConverterVersion"
     // https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter
 
     // OKHttp Lib
